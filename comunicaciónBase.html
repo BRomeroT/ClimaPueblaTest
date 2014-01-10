@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<!--
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Hello World</title>
+    <script src="http://debug-software.intel.com/target/target-script-min.js#CNlalTKd6HeLj5jfoPSSW-0jEQq3bz2CdJvb9OdDXZA"></script>
+</head>
+<body>
+    <div class="app">
+        <h1>Apache Cordova</h1>
+        <div id="deviceready" class="blink">
+            <p class="event listening">Connecting to Device</p>
+            <p class="event received">Device is Ready</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+    <p>Estaciones</p>
+    <ul></ul>
+    <button type="button" id="ButtonMedicion">Obtener Medición</button>
+    <div id="Medicion">
+
+    </div>
+
+
+    <script src="js/jquery-2.0.3.min.js" type="text/javascript"></script>
+    <script src="js/jquery.xdomainajax.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).bind("mobileinit", function () {
+            $.mobile.allowCrossDomainPages = true;
+        });
+        $(document).ready(function () {
+            $.support.cors = true;
+            CargarEstaciones();
+
+            $('#ButtonMedicion').click(function () {
+                ObtenerMedicion();
+            });
+        });
+
+        function CargarEstaciones() {
+            var Params = {};
+            Params.type = 'GET';
+            Params.url = 'http://www.climapuebla.org.mx/ClientBin/Sysne-Clima-Portal-Svr-RIAService.svc/JSON/GetEstaciones';
+            //Params.dataType = 'json';
+            Params.success = function (res) {
+                var entidad;
+                var data = $.parseJSON(res.responseText);
+                for (var i in data.GetEstacionesResult.RootResults) {
+                    entidad = data.GetEstacionesResult.RootResults[i];
+                    $('ul').append('<li>' + entidad.Nombre + '</li>');
+                }
+            };
+
+            $.ajax(Params);
+        }
+
+        function ObtenerMedicion() {
+            var numEstacion = 26861;
+            var fechaMedicion = new Date(2011, 08, 04, 10, 15, 0, 0);
+            //var filtro = JSON.stringify({
+            //    'numeroEstacion': numEstacion, 'fechaMedicion': fechaMedicion,
+            //    'isPersistent': 'true', 'customData': ''
+            //});
+
+            var Params = {};
+            Params.type = 'GET';
+            Params.url = 'http://www.climapuebla.org.mx/ClientBin/Sysne-Clima-Portal-Svr-RIAService.svc/JSON/GetMedicionPorEstiacionFecha';
+            //Params.dataType = 'json';
+            Params.data = { 'numeroEstacion': numEstacion, 'fechaMedicion': fechaMedicion.toJSON() };
+            //Params.data = filtro;
+            Params.success = function (res) {
+                var entidad;
+                var data = $.parseJSON(res.responseText);
+                for (var i in data.GetMedicionPorEstiacionFechaResult.RootResults) {
+                    entidad = data.GetMedicionPorEstiacionFechaResult.RootResults[i];
+                    $('div#Medicion').append('<p>Direccion del viento: ' + entidad.DireccionVientoActual + '</p>');
+                    $('div#Medicion').append('<p>Humedad relativa actual: ' + entidad.HumesdadRelativaActual + '</p>');
+                    $('div#Medicion').append('<p>Numero: ' + entidad.Numero + '</p>');
+                    $('div#Medicion').append('<p>Precipitación actual: ' + entidad.PrecipitacionActual + '</p>');
+                    $('div#Medicion').append('<p>Precipitación acumulada: ' + entidad.PrecipitacionAcumulada + '</p>');
+                    $('div#Medicion').append('<p>Punto de rocio actual: ' + entidad.PuntoDeRocioActual + '</p>');
+                    $('div#Medicion').append('<p>Temperatura actual: ' + entidad.TemperaturaActual + '</p>');
+                    $('div#Medicion').append('<p>Velocidad del viento actual: ' + entidad.VelocidadVientoActual + '</p>');
+                }
+            };
+
+            $.ajax(Params);
+        }
+
+    </script>
+
+</body>
+</html>

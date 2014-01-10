@@ -1,0 +1,31 @@
+{
+  "project": {
+    "projectSettingsVersion": "1.0",
+    "creationData": {
+      "type": "Import",
+      "src": "C:\\Users\\Benjamín\\Documents\\Visual Studio 2010\\Projects\\Produce\\Apps\\www",
+      "projectGuid": "f1a87d16-16ca-454f-a7a8-1f2cb3fc6cf1",
+      "lastModifiedDate": 1389300774920,
+      "creationDate": 1389300774882
+    },
+    "projectFiles": {},
+    "projectDirectories": {},
+    "libraries": [
+      {
+        "name": "Cordova",
+        "version": "2.9.0",
+        "data": {
+          "default": true
+        }
+      },
+      {
+        "name": "intelXDK",
+        "version": "4.0.0",
+        "data": {
+          "default": true
+        }
+      }
+    ],
+    "services": []
+  }
+}

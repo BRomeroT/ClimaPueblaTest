@@ -4,44 +4,75 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <title>Clima Puebla</title>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/ClimaPuebla.css" />
+
     <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=es-MX"></script>
     <script src="js/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="js/jquery.xdomainajax.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>Clima Puebla</title>
 </head>
 <body>
-    <style>
-        html, body {
-            height: 100%;
-        }
-
-        #header {
-            background-color: blue;
-            min-height: 10px;
-        }
-
-        #mapa {
-            height: 100%;
-        }
-
-        #info {
-            background-color: red;
-            min-height: 50px;
-        }
-    </style>
-    <div id="header">
+    <div id="InicioPage" data-role="page" style="display: none;">
+        <div data-role="header">
+            Clima Puebla
+            <img id="VerMapa" src="img/Map-Location.png" alt="Ver mapa" style="cursor: pointer; float: right;" />
+        </div>
     </div>
-    <div id="mapa">
-        <!--Al9zPH654c2ilovwyubEWKEKfK0Z3q_lFHBf-OIsNRHtv49Pf0cuE3m9pVT3hImU-->
+    <div id="MapaPage" data-role="page">
+        <div id="header" data-role="header">
+            <img id="IrInicio" src="img/Previous.png" alt="Ir a inicio" style="cursor: pointer" />
+            Condiciones actuales
+        </div>
+        <div id="mapa" data-role="content"></div>
+        <div id="info" data-role="info">
+            <select id="estacionesSelect" style="width: 100%"></select>
+            <div id="areaTemperatura">21.5 °C</div>
+            <br />
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <img src="img/Humedad.png" alt="Humedad" /></td>
+                    <td id="Humedad" style="width: 50%">37%</td>
+                    <td>
+                        <img src="img/Viento.png" alt="Viento" /></td>
+                    <td id="Viento" style="width: 50%">N 0 km/h</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="img/PuntoDeRocio.png" alt="Punto de rocio" /></td>
+                    <td id="PuntoDeRocio" style="width: 50%">6.2 °C</td>
+                    <td>
+                        <img src="img/Lluvia.png" alt="Lluvia" /></td>
+                    <td id="Lluvia" style="width: 50%">0 mm</td>
+                </tr>
+            </table>
+            <div style="text-align:right;">
+                <span style="display:none;text-align: right; font-size: xx-small">datos correspondientes a la fecha:</span>
+                <span id="FechaActualizacion" style="text-align: right; font-size: x-small">11/01/2004 12:15 p.m.</span>
+                <img style="vertical-align:middle" src="img/Calendar-Date-03.png" alt="seleccionar fecha" />
+            </div>
+        </div>
     </div>
-    <div id="info">
-    </div>
+
     <script type="text/javascript">
         $(document).bind("mobileinit", function () {
             $.mobile.allowCrossDomainPages = true;
         });
         $(document).ready(function () {
+            $("#VerMapa").click(function () {
+                $("#InicioPage").hide("fadeOut");
+                $("#MapaPage").show("fadeIn");
+            });
+            $("#IrInicio").click(function () {
+                $("#MapaPage").hide("fadeOut");
+                $("#InicioPage").show("fadeIn");
+            });
+            $("#mapa").height($(window).height() - $("#header").height() - $("#info").height() - 50);
+            $(window).resize(function () {
+                $("#mapa").height($(window).height() - $("#header").height() - $("#info").height() - 50);
+            });
             $.support.cors = true;
             var mapa = new Microsoft.Maps.Map(document.getElementById("mapa"),
                 {
@@ -74,6 +105,8 @@
                             var entidad = $('#' + $(e.target._htmlContent).attr('id')).data('entidad');
                             alert(entidad.Nombre);
                         });
+                        /*Llenar el select*/
+                        $("#estacionesSelect").append('<option value="' + estacion.Numero + '">' + estacion.Nombre + '</option>');
                     }
                 };
 

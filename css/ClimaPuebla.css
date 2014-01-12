@@ -22,6 +22,7 @@
     font-size: large;
     border-bottom: 1px solid;
     border-color: #A9A9A9;
+    text-transform:uppercase;
 }
 
     [data-role="header"] > img {

@@ -8,19 +8,84 @@
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/ClimaPuebla.css" />
+    <link rel="stylesheet" type="text/css" href="css/MetroJs.css" />
 
     <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=es-MX"></script>
     <script src="js/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="js/jquery.xdomainajax.js" type="text/javascript"></script>
+    <script src="js/MetroJs.js" type="text/javascript"></script>
 </head>
 <body>
-    <div id="InicioPage" data-role="page" style="display: none;">
+    <div id="InicioPage" data-role="page">
+        <!--style="display: none;">-->
         <div data-role="header">
             Clima Puebla
             <img id="VerMapa" src="img/Map-Location.png" alt="Ver mapa" style="cursor: pointer; float: right;" />
         </div>
+        <div id="MenuPrincipal" data-role="content" style="padding:10px;overflow:scroll;align-content:center">
+            <div id="CondicionesActualesTile" class="live-tile" data-mode="flip" data-delay="4000">
+                <img class="full" src="img/CondicionesActualesTile.png" alt="" />
+                <div class="tile-title">Ahora</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="TemperaturaActualTile" class="live-tile" data-mode="flip" data-delay="3500">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Temperatura</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="PrecipitacionTile" class="live-tile" data-mode="flip" data-delay="5000">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Precipitación</div>
+                <div style="padding:15px">0 mm<br />San Andrés Cholula</div>
+            </div>
+            <div id="VientoActualTile" class="live-tile" data-mode="flip" data-delay="5500">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Viento</div>
+                <div style="padding:15px">5 km/h<br />San Andrés Cholula</div>
+            </div>
+            <div id="HumedadTile" class="live-tile" data-mode="flip" data-delay="4800">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Humedad relativa</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="PuntoDeRocioTile" class="live-tile" data-mode="flip" data-delay="4900">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Punto de rocío</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="RadiacionTile" class="live-tile" data-mode="flip" data-delay="4200">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Radiacion solar</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="GraficasTile" class="live-tile" data-mode="flip" data-delay="4300">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Gráficas</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="ObservacionesTile" class="live-tile" data-mode="flip" data-delay="5100">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Observaciones</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="SateliteNacionalTile" class="live-tile" data-mode="flip" data-delay="5200">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Satélite nacional</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="IR4Tile" class="live-tile" data-mode="flip" data-delay="5500">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">IR4</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+            <div id="RadarTile" class="live-tile" data-mode="flip" data-delay="4850">
+                <img class="full" src="img/SinIconoTile.png" alt="" />
+                <div class="tile-title">Radar</div>
+                <div style="padding:15px">22°C<br />San Andrés Cholula</div>
+            </div>
+        </div>
     </div>
-    <div id="MapaPage" data-role="page">
+    <div id="MapaPage" data-role="page" style="display:none">
         <div id="header" data-role="header">
             <img id="IrInicio" src="img/Previous.png" alt="Ir a inicio" style="cursor: pointer" />
             Condiciones actuales
@@ -48,10 +113,10 @@
                     <td id="Lluvia" style="width: 50%">0 mm</td>
                 </tr>
             </table>
-            <div style="text-align:right;">
-                <span style="display:none;text-align: right; font-size: xx-small">datos correspondientes a la fecha:</span>
+            <div style="text-align: right;">
+                <span style="display: none; text-align: right; font-size: xx-small">datos correspondientes a la fecha:</span>
                 <span id="FechaActualizacion" style="text-align: right; font-size: x-small">11/01/2004 12:15 p.m.</span>
-                <img style="vertical-align:middle" src="img/Calendar-Date-03.png" alt="seleccionar fecha" />
+                <img style="vertical-align: middle" src="img/Calendar-Date-03.png" alt="seleccionar fecha" />
             </div>
         </div>
     </div>
@@ -60,19 +125,47 @@
         $(document).bind("mobileinit", function () {
             $.mobile.allowCrossDomainPages = true;
         });
-        $(document).ready(function () {
-            $("#VerMapa").click(function () {
+
+        function InicializarInterfase() {
+            function MostrarMapa() {
                 $("#InicioPage").hide("fadeOut");
                 $("#MapaPage").show("fadeIn");
-            });
-            $("#IrInicio").click(function () {
+            }
+
+            function OcultarMapa() {
                 $("#MapaPage").hide("fadeOut");
                 $("#InicioPage").show("fadeIn");
+            }
+
+            $("#VerMapa").click(function () {
+                MostrarMapa();
             });
+            $("#IrInicio").click(function () {
+                OcultarMapa();
+            });
+
+            //Mantiene el mapa en el tamaño necesario del navegador
             $("#mapa").height($(window).height() - $("#header").height() - $("#info").height() - 50);
             $(window).resize(function () {
                 $("#mapa").height($(window).height() - $("#header").height() - $("#info").height() - 50);
             });
+            //Mantiene los tiles en el tamaño necesario del navegador
+            $("#MenuPrincipal").height($(window).height() - $("#header").height());
+            $(window).resize(function () {
+                $("#MenuPrincipal").height($(window).height() - $("#header").height());
+            });
+
+            //Inicializa y responde a los Tiles
+            $(".live-tile, .flip-list").not(".exclude").liveTile();
+            $("#CondicionesActualesTile").click(function () {
+                //TODO: Cargar CondicionesActuales
+                MostrarMapa();
+            });
+        }
+
+        $(document).ready(function () {
+            InicializarInterfase();
+
             $.support.cors = true;
             var mapa = new Microsoft.Maps.Map(document.getElementById("mapa"),
                 {

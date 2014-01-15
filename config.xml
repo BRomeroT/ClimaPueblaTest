@@ -12,7 +12,7 @@
   
   <content src="index.html" />
   
-  <preference name="Fullscreen" value="true" />
+  <preference name="fullscreen" value="true" /> 
   <!--<preference name="Orientation" value="portrait" />-->
   <access origin="*"/>
   <preference name="webviewbounce" value="false" />

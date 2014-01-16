@@ -569,7 +569,7 @@
 .live-tile,
 .list-tile,
 .copy-tile {
-    color: #A9A9A9;
+    color: #fff; /*#A9A9A9;*/
     overflow: hidden;
     position: relative;
     z-index: 20;
@@ -586,6 +586,7 @@
         font-size: 1em;
         line-height: 1.2em;
         margin: 0;
+        font-weight:bold;
     }
 
     .live-tile .face,

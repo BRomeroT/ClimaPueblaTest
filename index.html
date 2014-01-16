@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/ClimaPuebla.css" />
     <link rel="stylesheet" type="text/css" href="css/MetroJs.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=es-MX"></script>
     <script src="js/jquery-2.0.3.min.js" type="text/javascript"></script>
@@ -22,97 +23,109 @@
             <img id="VerMapa" src="img/Map-Location.png" alt="Ver mapa" style="cursor: pointer; float: right;" />
         </div>
         <div id="MenuPrincipal" data-role="content" style="padding: 10px; overflow: scroll; align-content: center">
-            <div id="CondicionesActualesTile" class="live-tile" data-mode="flip" data-delay="4000">
-                <img class="full" src="img/CondicionesActualesTile.png" alt="" />
-                <div class="tile-title">Ahora</div>
+            <div id="CondicionesActualesTile" class="live-tile Tile-Redondeado-5 degradado-01" data-mode="carousel" data-delay="4000">
+                <!--<img class="full" src="img/CondicionesActualesTile.png" alt="" />-->
+                <a href="#" data-icon="H" style="text-decoration: none;"></a>
+                <p class="tile-title">Ahora</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="TemperaturaActualTile" class="live-tile" data-mode="flip" data-delay="3500">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Temperatura</div>
+            <div id="TemperaturaActualTile" class="live-tile Tile-Redondeado-5 degradado-02" data-mode="carousel" data-delay="3500">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="*" style="text-decoration: none;"></a>
+                <p class="tile-title">Temperatura</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="PrecipitacionTile" class="live-tile" data-mode="flip" data-delay="5000">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Precipitación</div>
+            <div id="PrecipitacionTile" class="live-tile Tile-Redondeado-5 degradado-03" data-mode="carousel" data-delay="5000">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="R" style="text-decoration: none;"></a>
+                <p class="tile-title">Precipitación</p>
                 <div style="padding: 15px">
                     0 mm<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="VientoActualTile" class="live-tile" data-mode="flip" data-delay="5500">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Viento</div>
+            <div id="VientoActualTile" class="live-tile Tile-Redondeado-5 degradado-04" data-mode="carousel" data-delay="5500">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="F" style="text-decoration: none;"></a>
+                <p class="tile-title">Viento</p>
                 <div style="padding: 15px">
                     5 km/h<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="HumedadTile" class="live-tile" data-mode="flip" data-delay="4800">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Humedad relativa</div>
+            <div id="HumedadTile" class="live-tile Tile-Redondeado-5 degradado-05" data-mode="carousel" data-delay="4800">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="Q" style="text-decoration: none;"></a>
+                <p class="tile-title">Humedad relativa</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="PuntoDeRocioTile" class="live-tile" data-mode="flip" data-delay="4900">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Punto de rocío</div>
+            <div id="PuntoDeRocioTile" class="live-tile Tile-Redondeado-5 degradado-06" data-mode="carousel" data-delay="4900">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="T" style="text-decoration: none;"></a>
+                <p class="tile-title">Punto de rocío</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="RadiacionTile" class="live-tile" data-mode="flip" data-delay="4200">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Radiacion solar</div>
+            <div id="RadiacionTile" class="live-tile Tile-Redondeado-5 degradado-07" data-mode="carousel" data-delay="4200">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="B" style="text-decoration: none;"></a>
+                <p class="tile-title">Radiacion solar</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="GraficasTile" class="live-tile" data-mode="flip" data-delay="4300">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Gráficas</div>
+            <div id="GraficasTile" class="live-tile Tile-Redondeado-5 degradado-08" data-mode="carousel" data-delay="4300">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="J" style="text-decoration: none;"></a>
+                <p class="tile-title">Gráficas</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="ObservacionesTile" class="live-tile" data-mode="flip" data-delay="5100">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Observaciones</div>
+            <div id="ObservacionesTile" class="live-tile Tile-Redondeado-5 degradado-09" data-mode="carousel" data-delay="5100">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="'" style="text-decoration: none;"></a>
+                <p class="tile-title">Observaciones</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="SateliteNacionalTile" class="live-tile" data-mode="flip" data-delay="5200">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Satélite nacional</div>
+            <div id="SateliteNacionalTile" class="live-tile Tile-Redondeado-5 degradado-10" data-mode="carousel" data-delay="5200">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="D" style="text-decoration: none;"></a>
+                <p class="tile-title">Satélite nacional</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="IR4Tile" class="live-tile" data-mode="flip" data-delay="5500">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">IR4</div>
+            <div id="IR4Tile" class="live-tile Tile-Redondeado-5 degradado-11" data-mode="carousel" data-delay="5500">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="D" style="text-decoration: none;"></a>
+                <p class="tile-title">IR4</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula
                 </div>
             </div>
-            <div id="RadarTile" class="live-tile" data-mode="flip" data-delay="4850">
-                <img class="full" src="img/SinIconoTile.png" alt="" />
-                <div class="tile-title">Radar</div>
+            <div id="RadarTile" class="live-tile Tile-Redondeado-5 degradado-12" data-mode="carousel" data-delay="4850">
+                <!--<img class="full" src="img/SinIconoTile.png" alt="" />-->
+                <a href="#" data-icon="D" style="text-decoration: none;"></a>
+                <p class="tile-title">Radar</p>
                 <div style="padding: 15px">
                     22°C<br />
                     San Andrés Cholula

@@ -10,6 +10,7 @@
 
     EventosMapa: {
         Pin_Click: function (pin) {
+            alert($(pin._htmlContent).attr('id'));
             //Cacha el Click por cada pin
             Datos.SeleccionarPin(pin);
         }

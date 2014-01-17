@@ -1,0 +1,3 @@
+﻿Datos.CargarViento = function () {
+
+};

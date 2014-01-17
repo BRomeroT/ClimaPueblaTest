@@ -1,0 +1,3 @@
+﻿Datos.CargarTemperatura = function () {
+
+};

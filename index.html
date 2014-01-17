@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <script charset="UTF-8" type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=es-MX"></script>
+    <!-- Bing Map Control references -->
+    <script type="text/javascript" src="ms-appx:///Bing.Maps.JavaScript//js/veapicore.js"></script>
     <script src="js/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="js/jquery.xdomainajax.js" type="text/javascript"></script>
     <script src="js/MetroJs.js" type="text/javascript"></script>
@@ -22,7 +24,7 @@
             Clima Puebla
             <img id="VerMapa" src="img/Map-Location.png" alt="Ver mapa" style="cursor: pointer; float: right;" />
         </div>
-        <div id="MenuPrincipal" data-role="content" style="padding: 10px; overflow: scroll; align-content: center">
+        <div id="MenuPrincipal" data-role="content">
             <div id="CondicionesActualesTile" class="live-tile Tile-Redondeado-5 degradado-01" data-mode="carousel" data-delay="4000">
                 <!--<img class="full" src="img/CondicionesActualesTile.png" alt="" />-->
                 <a href="#" data-icon="H" style="text-decoration: none;"></a>
@@ -132,6 +134,9 @@
                 </div>
             </div>
         </div>
+        <div id="Publicidad" data-role="Publicidad">
+
+        </div>
     </div>
     <div id="MapaPage" data-role="page" style="display: none">
         <div id="header" data-role="header">
@@ -146,18 +151,22 @@
             <table style="width: 100%">
                 <tr>
                     <td>
-                        <img src="img/Humedad.png" alt="Humedad" /></td>
+                        <img src="img/Humedad.png" alt="Humedad" />
+                    </td>
                     <td id="Humedad" style="width: 50%">37%</td>
                     <td>
-                        <img src="img/Viento.png" alt="Viento" /></td>
+                        <img src="img/Viento.png" alt="Viento" />
+                    </td>
                     <td id="Viento" style="width: 50%">N 0 km/h</td>
                 </tr>
                 <tr>
                     <td>
-                        <img src="img/PuntoDeRocio.png" alt="Punto de rocio" /></td>
+                        <img src="img/PuntoDeRocio.png" alt="Punto de rocio" />
+                    </td>
                     <td id="PuntoDeRocio" style="width: 50%">6.2 °C</td>
                     <td>
-                        <img src="img/Lluvia.png" alt="Lluvia" /></td>
+                        <img src="img/Lluvia.png" alt="Lluvia" />
+                    </td>
                     <td id="Lluvia" style="width: 50%">0 mm</td>
                 </tr>
             </table>
@@ -170,92 +179,18 @@
     </div>
 
     <script type="text/javascript" src="js/MenuTiles.js"></script>
+    <script type="text/javascript" src="js/Mapa.js"></script>
 
-    <script type="text/javascript">
-        //function claseX(i,x,y) {
-        //    this.Nombre = i;
-        //    this.Otro = x;
-        //    this.Calculo = function () {
-
-        //    };
-        //}
-
-        //var obj = new claseX("Benjamin", 10, 12);
-        //obj.Calculo();
-
-        var Mapa = {
-            mapaElement: null, mapaElementId: "", estacionesSelectId: "", eventos: null,
-            Inicializar: function (mapaElementId, estacionesSelectId, eventos) {
-                Mapa.mapaElementId = mapaElementId;
-                Mapa.estacionesSelectId = estacionesSelectId;
-                Mapa.eventos = eventos;
-                Mapa.mapaElement = new Microsoft.Maps.Map(document.getElementById(mapaElementId),
-                                {
-                                    credentials: "Al9zPH654c2ilovwyubEWKEKfK0Z3q_lFHBf-OIsNRHtv49Pf0cuE3m9pVT3hImU",
-                                    mapTypeId: Microsoft.Maps.MapTypeId.road,
-                                    center: new Microsoft.Maps.Location(19.040899, -98.138100),
-                                    zoom: 8,
-                                    enableSearchLogo: false,
-                                    showMapTypeSelector: false,
-                                })
-            },
-
-            Estaciones: {},
-
-            EstacinSeleccionada: null,
-
-            SeleccinarEstacion: function (estacionNumero) {
-                var estacion = Mapa.Estaciones[estacionNumero];
-                if (Mapa.EstacinSeleccionada != estacion) {
-                    Mapa.EstacinSeleccionada = estacion;
-                    //Selecciona en el Select la estación correspondiente (por si fue seleccionada en el mapa)
-                    if ($("#" + Mapa.estacionesSelectId).val() != estacion.Numero) {
-                        $("#" + Mapa.estacionesSelectId + " option").removeAttr("selected");
-                        $("#" + Mapa.estacionesSelectId + " option[value=" + estacionNumero + "]").attr("selected", "selected");
-                    }
-                    Mapa.eventos.EstacionSeleccionada(estacion);
-                }
-            },
-
-            CargarEstaciones: function () {
-                var Params = {};
-                Params.type = 'GET';
-                Params.url = 'http://www.climapuebla.org.mx/ClientBin/Sysne-Clima-Portal-Svr-RIAService.svc/JSON/GetEstaciones';
-                //Params.dataType = 'json';
-                Params.success = function (res) {
-                    var data = $.parseJSON(res.responseText);
-                    for (var i in data.GetEstacionesResult.RootResults) {
-                        var estacion = data.GetEstacionesResult.RootResults[i];
-                        var pos = new Microsoft.Maps.Location(estacion.Latitud, estacion.Longitud)
-                        var pin = new Microsoft.Maps.Pushpin(pos, {
-                            htmlContent:
-                                '<div id="estacion' + estacion.Numero + '"><div style="border-radius:10px;height:10px;width:10px;background-color:' + estacion.ColorDistintivo + ';"/><div></div></div>'
-                        });
-                        Mapa.mapaElement.entities.push(pin);
-                        //$('#estacion' + estacion.Numero).data('entidad', estacion);
-                        Mapa.Estaciones[estacion.Numero] = estacion;
-                        Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
-                            //var entidad = $('#' + $(e.target._htmlContent).attr('id')).data('entidad');
-                            Mapa.SeleccinarEstacion($(e.target._htmlContent).attr('id').replace('estacion', ''));
-                        });
-                        /*Llenar el select*/
-                        $("#" + Mapa.estacionesSelectId).append('<option value="' + estacion.Numero + '">' + estacion.Nombre + '</option>');
-                        $("#" + Mapa.estacionesSelectId).change(function () {
-                            Mapa.SeleccinarEstacion($(this).val());
-                        });
-                    }
-                };
-
-                $.ajax(Params);
-            },
-
-            LimpiarDatos: function () {
-                //var choulua = Mapa.Estaciones[2222];
-                //cholula.PosicionDatos
-            }
-
-        };
-    </script>
+    <script type="text/javascript" src="js/Datos.js"></script>
+    <script type="text/javascript" src="js/Datos/CondicionesActuales.js"></script>
+    <script type="text/javascript" src="js/Datos/Graficas.js"></script>
+    <script type="text/javascript" src="js/Datos/Humedad.js"></script>
+    <script type="text/javascript" src="js/Datos/MapasExternos.js"></script>
+    <script type="text/javascript" src="js/Datos/Observaciones.js"></script>
+    <script type="text/javascript" src="js/Datos/Precipitacion.js"></script>
+    <script type="text/javascript" src="js/Datos/PuntoDeRocio.js"></script>
+    <script type="text/javascript" src="js/Datos/Temperatura.js"></script>
+    <script type="text/javascript" src="js/Datos/Viento.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -266,15 +201,25 @@
 
             InicializarInterfase();
 
-            var eventosMapa = {
+            Datos.Eventos = {
                 EstacionSeleccionada: function (estacion) {
-                    //alert(estacion.Nombre);
+                    
                 }
             };
 
-            Mapa.Inicializar("mapa", "estacionesSelect", eventosMapa);
-            Mapa.CargarEstaciones();
+            //PhoneGap: Saber si es Windows 8:
+            //Microsoft.Maps.loadModule('Microsoft.Maps.Map', { callback: initMap, culture: "es-mx", homeRegion: "MX" });
+            //function initMap() {
+            //    Mapa.Inicializar("mapa", "estacionesSelect", eventosMapa);
+            //    Mapa.CargarEstaciones();
+            //}
 
+            //si no:
+            Mapa.Inicializar("mapa", Datos.EventosMapa, function () {
+                Datos.CargarEstaciones();
+            }, function (e) {
+                alert('No hay conexión con el provedor del mapa');
+            });
         });
     </script>
 </body>

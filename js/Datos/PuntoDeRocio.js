@@ -1,0 +1,3 @@
+﻿Datos.CargarPuntoDeRocio = function () {
+
+};

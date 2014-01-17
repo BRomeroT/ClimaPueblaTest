@@ -22,15 +22,60 @@
         $("#mapa").height($(window).height() - $("#header").height() - $("#info").height() - 50);
     });
     //Mantiene los tiles en el tamaño necesario del navegador
-    $("#MenuPrincipal").height($(window).height() - $("#header").height());
+    $("#MenuPrincipal").height(($(window).height() - $("#header").height()) - ($("#Publicidad").height() + 30));
     $(window).resize(function () {
-        $("#MenuPrincipal").height($(window).height() - $("#header").height());
+        $("#MenuPrincipal").height(($(window).height() - $("#header").height()) - ($("#Publicidad").height() + 30));
     });
 
     //Inicializa y responde a los Tiles
     $(".live-tile, .flip-list").not(".exclude").liveTile();
+
     $("#CondicionesActualesTile").click(function () {
-        //TODO: Cargar CondicionesActuales
+        Datos.CargarCondicionesActuales();
+        MostrarMapa();
+    });
+    $("#TemperaturaActualTile").click(function () {
+        Datos.CargarTemperatura();
+        MostrarMapa();
+    });
+    $("#PrecipitacionTile").click(function () {
+        Datos.CargarPrecipitacion();
+        MostrarMapa();
+    });
+    $("#VientoActualTile").click(function () {
+        Datos.CargarViento();
+        MostrarMapa();
+    });
+    $("#HumedadTile").click(function () {
+        Datos.CargarHumedadRelativa();
+        MostrarMapa();
+    });
+    $("#PuntoDeRocioTile").click(function () {
+        Datos.CargarPuntoDeRocio();
+        MostrarMapa();
+    });
+    $("#GraficasTile").click(function () {
+        Datos.CargarGraficas();
+        MostrarMapa();
+    });
+    $("#ObservacionesTile").click(function () {
+        Datos.CargarObservaciones();
+        MostrarMapa();
+    });
+    $("#RadiacionTile").click(function () {
+        Datos.CargarRadiacionSolar();
+        MostrarMapa();
+    });
+    $("#SateliteNacionalTile").click(function () {
+        Datos.CargarSateliteNacional();
+        MostrarMapa();
+    });
+    $("#IR4Tile").click(function () {
+        Datos.CargarIR4();
+        MostrarMapa();
+    });
+    $("#RadarTile").click(function () {
+        Datos.CargarRadar();
         MostrarMapa();
     });
 }

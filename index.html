@@ -203,7 +203,10 @@
 
             Datos.Eventos = {
                 EstacionSeleccionada: function (estacion) {
-                    
+                    Datos.CargarInfo();
+                },
+                EstacionesListas: function () {
+                    Datos.CargarCondicionesActuales();
                 }
             };
 

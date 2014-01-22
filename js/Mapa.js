@@ -21,18 +21,29 @@
         }
     },
 
-    AgregarPin: function (html, latitud, longitud) {
+    AgregarPin: function (html, latitud, longitud)
+    {
         var pos = new Microsoft.Maps.Location(latitud, longitud)
         var pin = new Microsoft.Maps.Pushpin(pos, { htmlContent: html});
         Mapa.mapaElement.entities.push(pin);
-        Microsoft.Maps.Events.addHandler(pin, 'click', function (e) {
+        Microsoft.Maps.Events.addHandler(pin, 'click', function (e)
+        {
             if (Mapa.Eventos != null && Mapa.Eventos.Pin_Click != 'undefined') Mapa.Eventos.Pin_Click(e.target);
         });
         return pin;
     },
 
-    LimpiarDatos: function () {
+    LimpiarDatos: function ()
+    {
         //TODO: quitar los Pins del mapa
+        Mapa.mapaElement.entities.clear();
+        //for (var i = Mapa.mapaElement.entities.getLength() - 1; i >= 0; i--)
+        //{
+        //    var pushpin = Mapa.mapaElement.entities.get(i);
+        //    if (pushpin instanceof Microsoft.Maps.Pushpin)
+        //    {
+        //        Mapa.mapaElement.entities.removeAt(i);
+        //    };
+        //}
     }
-
 };

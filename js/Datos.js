@@ -33,46 +33,55 @@
         }
     },
 
-    CargarEstaciones: function () {
+    CargarEstaciones: function ()
+    {
+        Datos.Limpiar();
         var Params = {};
         Params.type = 'GET';
         Params.url = 'http://www.climapuebla.org.mx/ClientBin/Sysne-Clima-Portal-Svr-RIAService.svc/JSON/GetEstaciones';
         //Params.dataType = 'json';
-        Params.success = function (res) {
+        Params.success = function (res)
+        {
             var data = $.parseJSON(res.responseText);
             var esPrimera = true;//para selecionar la primera estacion
-            for (var i in data.GetEstacionesResult.RootResults) {
+            for (var i in data.GetEstacionesResult.RootResults)
+            {
                 var estacion = data.GetEstacionesResult.RootResults[i];
                 var htmlContent = "";
-                if (!estacion.PosicionDatos || estacion.PosicionDatos != "") {
-                    switch (estacion.PosicionDatos) {
+                if (!estacion.PosicionDatos || estacion.PosicionDatos != "")
+                {
+                    switch (estacion.PosicionDatos)
+                    {
                         case "I":
-                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3"></td></tr><tr><td id="M-' + estacion.Numero + '"></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td></td></tr><tr><td colspan="3"></td></tr></table></div>';
+                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3"></td></tr><tr><td id="M' + estacion.Numero + '"></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td></td></tr><tr><td colspan="3"></td></tr></table></div>';
                             break;
                         case "S":
-                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3" id="M-' + estacion.Numero + '"></td></tr><tr><td></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td></td></tr><tr><td colspan="3"></td></tr></table></div>';
+                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3" id="M' + estacion.Numero + '"></td></tr><tr><td></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td></td></tr><tr><td colspan="3"></td></tr></table></div>';
                             break;
                         case "A":
-                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3"></td></tr><tr><td></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td></td></tr><tr><td colspan="3" id="M-' + estacion.Numero + '"></td></tr></table></div>';
+                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3"></td></tr><tr><td></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td></td></tr><tr><td colspan="3" id="M' + estacion.Numero + '"></td></tr></table></div>';
                             break;
                         case "D":
-                        default:
-                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3"></td></tr><tr><td></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td id="M-' + estacion.Numero + '"></td></tr><tr><td colspan="3"></td></tr></table></div>';
+                            htmlContent = '<div id="estacion' + estacion.Numero + '" style="cursor:pointer"><table class="estacion"><tr><td colspan="3"></td></tr><tr><td></td><td><div class="punto" style="background-color:' + estacion.ColorDistintivo + ';"></div></td><td id="M' + estacion.Numero + '"></td></tr><tr><td colspan="3"></td></tr></table></div>';
                             break;
                     }
                 }
                 Datos.Estaciones[estacion.Numero] = estacion;
                 var pin = Mapa.AgregarPin(htmlContent, estacion.Latitud, estacion.Longitud);
                 /*Llenar el select*/
-                if (esPrimera == true) {
+                if (esPrimera == true)
+                {
                     $("#" + Datos.estacionesSelectId).append('<option value="' + estacion.Numero + '" selected="selected">' + estacion.Nombre + '</option>');
-                } else {
+                } else
+                {
                     $("#" + Datos.estacionesSelectId).append('<option value="' + estacion.Numero + '">' + estacion.Nombre + '</option>');
                 }
-                $("#" + Datos.estacionesSelectId).change(function () {
+                $("#" + Datos.estacionesSelectId).change(function ()
+                {
                     Datos.SeleccionarEstacion($(this).val());
                 });
-                if (esPrimera == true) {
+                if (esPrimera == true)
+                {
                     esPrimera = false;
                     Datos.SeleccionarEstacion(estacion.Numero);
                 }
@@ -82,15 +91,17 @@
         $.ajax(Params);
     },
 
-    Limpiar: function () {
-        $.each(Datos.Estaciones, function (index, value) {
-            $("#M-" + value.Numero).empty();
+    Limpiar: function ()
+    {
+        $.each(Datos.Estaciones, function (index, value)
+        {
+            $("#M" + value.Numero).empty();
         });
     },
 
     MostrarDato: function (numEstacion, htmlContent) {
-        $("#M-" + numEstacion).empty();
-        $("#M-" + numEstacion).append(htmlContent);
+        $("#M" + numEstacion).empty();
+        $("#M" + numEstacion).html(htmlContent);
     },
 
     CargarInfo: null,
@@ -102,7 +113,7 @@
     CargarPuntoDeRocio: null,
     CargarGraficas: null,
     CargarObservaciones: null,
-    CargarRadiacionSolar: null,
+    CargarRadiacion: null,
     CargarSateliteNacional: null,
     CargarIR4: null,
     CargarRadar: null

@@ -254,22 +254,13 @@
     }
 .Sombra
 {
-    /*-webkit-box-shadow: 0 8px 6px -6px black;
-       -moz-box-shadow: 0 8px 6px -6px black;
-	    box-shadow: 0 8px 6px -6px black;*/
+    -webkit-box-shadow: 0 8px 6px -6px black;
+    -moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
 }
-.fondo-bokeh-01
+.Medicion 
 {
-    background-image:url('../img/f01.jpg');
-    background-repeat:no-repeat;
-}
-.fondo-bokeh-02
-{
-    background-image:url('../img/f02.jpg');
-    background-repeat:no-repeat;
-}
-.fondo-bokeh-03
-{
-    background-image:url('../img/f03.jpg');
-    background-repeat:no-repeat;
+    color:#fff;
+    text-align:center;
+    min-width:25px;
 }
